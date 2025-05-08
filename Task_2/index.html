@@ -1,1 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Player</title>
 
+    <script
+      src="https://kit.fontawesome.com/1935d064dd.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="splash-screen">
+      <h1 class="typing-text"><span>Welcome to Music Player</span></h1>
+    </div>
+
+    <div class="main-container" style="display: none">
+      <div class="music_container">
+        <div class="music_player">
+          <!-- Music Header -->
+          <div class="music-header">
+            <i class="fas fa-music"></i>
+            <h2>Now Playing</h2>
+            <i class="fas fa-bars"></i>
+          </div>
+
+          <!-- Song Parts -->
+          <div class="music-parts">
+            <p id="singer"></p>
+            <img src="assets/music_icon.jpg" alt="Music Icon" id="hero-img" />
+            <p class="music-title"></p>
+          </div>
+
+          <!-- Player Controls -->
+          <div class="control_area">
+            <div class="timer">
+              <span class="current-time"></span>
+              <!-- slider -->
+              <input
+                type="range"
+                class="duration-slider"
+                min="0"
+                max="100"
+                value="0"
+              />
+              <span class="duration-time"></span>
+            </div>
+
+            <!-- Volume -->
+            <div class="volume">
+              <p id="display-volume">50</p>
+              <input
+                type="range"
+                id="volume-slider"
+                min="0"
+                max="100"
+                value="50"
+              />
+              <i class="fas fa-volume-mute" id="volume-icon"></i>
+            </div>
+            <!-- Control Buttons -->
+            <div class="ctrl-btns">
+              <button class="skip-backward">
+                <i class="fas fa-backward"></i>
+              </button>
+              <button class="prev-btn">
+                <i class="fas fa-step-backward"></i>
+              </button>
+              <button class="play-btn">
+                <i class="fas fa-play"></i>
+              </button>
+              <button class="next-btn">
+                <i class="fas fa-step-forward"></i>
+              </button>
+              <button class="skip-forward">
+                <i class="fas fa-forward"></i>
+              </button>
+            </div>
+            <div class="music-waves" id="music-waves">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </div>
+
+            <!-- Autoplay Button -->
+            <button class="play-all">
+              Play All &nbsp;
+              <i class="fas fa-sync-alt"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Playlist -->
+        <div class="playlist">
+          <!-- Music Header -->
+          <div class="playlist-header">
+            <i class="fas fa-music"></i>
+            <h2>Playlist</h2>
+            <i class="fas fa-times"></i>
+          </div>
+          <div class="playlist-controls">
+            <input type="text" id="search-bar" placeholder="Search songs..." />
+            <select id="category-filter">
+              <option value="all">All</option>
+              <option value="Asim Azhar">Asim Azhar</option>
+              <option value="Arijit Singh">Arijit Singh</option>
+              <option value="Neha Kakkar">Neha Kakkar</option>
+              <option value="Vilen">Vilen</option>
+              <option value="Fukra Insan">Fukra Insan</option>
+              <option value="Guru Randhawa">Guru Randhawa</option>
+              <option value="Armaan Malik">Armaan Malik</option>
+            </select>
+          </div>
+          <!-- Playlist Items -->
+          <div class="playlist-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+    <script>
+      window.addEventListener("load", () => {
+        const splash = document.querySelector(".splash-screen");
+        const mainApp = document.querySelector(".main-container");
+
+        setTimeout(() => {
+          splash.style.transition = "opacity 1s ease";
+          splash.style.opacity = 0;
+          setTimeout(() => {
+            splash.style.display = "none";
+            mainApp.style.display = "block";
+          }, 1000);
+        }, 4000); // Delay matches typing duration
+      });
+    </script>
+  </body>
+</html>
