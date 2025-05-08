@@ -1,4 +1,4 @@
-1. **Task_1: 🚀 To-Do List Web App**
+**1. Task_1: 🚀 To-Do List Web App**
    
 This project was developed as part of my internship at **Rhombix Technologies**. It is a full-fledged To-Do List Web Application built using HTML, CSS, and JavaScript, designed to manage daily tasks with an intuitive and responsive user interface.
 
@@ -16,7 +16,11 @@ This project was developed as part of my internship at **Rhombix Technologies**.
 
 This project helped me strengthen my skills in front-end web development, including DOM manipulation, event handling, and responsive design. It was a part of my task assignments during the internship and showcases practical application of modern web development practices.
 
-2. Task_2:  🎵 **Music Player Web App**
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+**2. Task_2:  🎵 Music Player Web App**
 This project was developed as part of my internship at **Rhombix Technologies**. It is a fully functional Music Player Web Application built using **HTML, CSS, and JavaScript**, designed to deliver a smooth and engaging audio playback experience with a clean, responsive user interface.
 
 🛠️ **Key Features:**
