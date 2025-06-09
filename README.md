@@ -49,8 +49,8 @@ This project was developed as part of my internship at **Rhombix Technologies**.
 🛠️ **Key Features:**
 
 - Add, edit, and delete books from the library
-- Search books by title or author
-- Categorize books by genre, tags, or author
+- Search books by author
+- Categorize books by genre and author
 - Track borrowing history with date records
 - Persistent data storage using localStorage
 - Responsive design optimized for desktop and mobile
