@@ -40,3 +40,28 @@ This project was developed as part of my internship at **Rhombix Technologies**.
 This project allowed me to enhance my front-end development skills, particularly in **JavaScript event handling** and **DOM manipulation**. It was part of my task assignments during the internship and reflects my practical understanding of modern web development techniques.
 
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+**3. Task_3: 📚 Personal Book Library Web App**
+This project was developed as part of my internship at **Rhombix Technologies**. It is a feature-rich Personal Book Library Web Application built using HTML, CSS, and JavaScript, aimed at helping users manage their book collections efficiently through an interactive and responsive interface.
+
+🛠️ **Key Features:**
+
+- Add, edit, and delete books from the library
+- Search books by title or author
+- Categorize books by genre, tags, or author
+- Track borrowing history with date records
+- Persistent data storage using localStorage
+- Responsive design optimized for desktop and mobile
+- Intuitive and minimalistic user interface
+
+💡 **Technologies Used:**
+
+- HTML
+- CSS
+- JavaScript
+
+This project enhanced my understanding of client-side data handling, UI/UX design, and state management using localStorage. It was a valuable part of my internship assignment, reinforcing my skills in front-end development and allowing me to create a practical solution for personal content management.
+
+
