@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="logo-nav">
+        <h1>📚 SIA Book Library</h1>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="borrowbook.html">Borrow</a></li>
+            <li><a href="borrowhistory.html">History</a></li>
+            <button id="favorites-btn" title="View Favorites">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Favorite Books -->
+    <div id="favorites-modal" class="favorites-modal hidden">
+      <div class="favorites-content">
+        <h2>Your Favorite Books</h2>
+        <button id="close-favorites">&times;</button>
+        <div id="favorites-container"></div>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-decor-lines"></div>
+      <div class="hero-text">
+        <h1>The more that you discover, the more you'll achieve.</h1>
+        <p class="subtitle">
+          The more that you practice, the more you believe.
+        </p>
+      </div>
+      <div class="hero-image">
+        <img src="assets/StudentStudy.jpeg" alt="Reading person" />
+      </div>
+    </section>
+
+    <section class="categories">
+      <h2>Explore Categories</h2>
+      <div class="category-grid" id="category-grid"></div>
+    </section>
+
+    <div class="container">
+      <h1 class="main-heading">Library Management System</h1>
+      <div class="search-books">
+        <input
+          type="text"
+          id="search-book-input"
+          placeholder="Search by author"
+        />
+        <button id="search-btn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+
+      <select id="genre-filter">
+        <option value="all">All Genres</option>
+        <option value="fiction">Fiction</option>
+        <option value="history">History</option>
+        <option value="science">Science</option>
+        <option value="biography">Biography</option>
+        <option value="fantasy">Fantasy</option>
+        <option value="romance">Romance</option>
+        <option value="mystery">Mystery</option>
+      </select>
+
+      <div class="content-wrapper">
+        <div id="books-container"></div>
+      </div>
+
+      <div id="no-books-message"></div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Library Management System</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

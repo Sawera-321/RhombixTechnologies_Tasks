@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Borrow a Book</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        background-color: #eef1f5;
+      }
+
+      .site-header {
+        background-color: #0d1b2a;
+        color: white;
+        padding: 1em 2em;
+      }
+
+      .logo-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .logo-nav h1 {
+        margin: 0;
+        font-size: 1.8rem;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1em;
+        padding: 0;
+        margin: 0;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+      }
+
+      .form-container {
+        max-width: 900px;
+        margin: 5em auto;
+        background: #f8f9fa;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .heading {
+        background-color: #0d1b2a;
+        padding: 0.8em;
+        margin-bottom: 1em;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: white;
+      }
+
+      .form_area {
+        padding: 3em 2rem 3em 6em;
+      }
+
+      input,
+      textarea,
+      button {
+        margin-top: 0.7em;
+        display: block;
+        width: 80%;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        padding: 1em;
+        font-size: 1.2rem;
+        border-radius: 20px;
+        font-weight: 500;
+        border: 1px solid #ccc;
+      }
+
+      label {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      button {
+        margin: 1em auto;
+        width: 200px;
+        background-color: #0d1b2a;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 1em 1.5em;
+        font-size: 1.5rem;
+        border-radius: 20px;
+        font-weight: 600;
+        margin-top: 2em;
+      }
+
+      button:hover {
+        background-color: #1f3c5c;
+      }
+
+      footer {
+        text-align: center;
+        padding: 1.5em;
+        background-color: #0d1b2a;
+        color: white;
+        margin-top: 3em;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="logo-nav">
+        <h1>📚 SIA Book Library</h1>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="borrowbook.html">Borrow</a></li>
+            <li><a href="borrowhistory.html">History</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="form-container">
+      <div class="heading">
+        <h1>Borrow a Book</h1>
+      </div>
+
+      <div class="form_area">
+        <form id="borrow-form">
+          <label>Your Name:</label>
+          <input type="text" id="name" required />
+
+          <label>Days to Borrow:</label>
+          <input type="number" id="days" required />
+
+          <label>Start Date:</label>
+          <input type="date" id="start" required />
+
+          <label>End Date:</label>
+          <input type="date" id="end" required />
+
+          <label>Your Email:</label>
+          <input type="email" id="email" required />
+
+          <label>Your Address:</label>
+          <textarea id="address" required></textarea>
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+
+      <div
+        id="message"
+        style="margin-top: 10px; text-align: center; font-weight: bold"
+      ></div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Library Management System</p>
+    </footer>
+
+    <script>
+      document
+        .getElementById("borrow-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const borrower = document.getElementById("name").value.trim();
+          const days = document.getElementById("days").value.trim();
+          const startDate = document.getElementById("start").value;
+          const endDate = document.getElementById("end").value;
+          const email = document.getElementById("email").value.trim();
+          const address = document.getElementById("address").value.trim();
+
+          const title =
+            localStorage.getItem("selectedBookTitle") || "Untitled Book";
+
+          if (
+            !borrower ||
+            !days ||
+            !startDate ||
+            !endDate ||
+            !email ||
+            !address
+          ) {
+            document.getElementById("message").textContent =
+              "Please fill in all the fields.";
+            return;
+          }
+
+          const borrowEntry = {
+            title,
+            borrower,
+            days,
+            startDate,
+            endDate,
+            email,
+            address,
+          };
+
+          const history =
+            JSON.parse(localStorage.getItem("borrowHistory")) || [];
+          history.push(borrowEntry);
+          localStorage.setItem("borrowHistory", JSON.stringify(history));
+
+          document.getElementById("message").textContent =
+            "Thank you! Your borrow request has been saved.";
+
+          setTimeout(() => {
+            window.location.href = "borrowhistory.html";
+          }, 1500);
+        });
+    </script>
+  </body>
+</html>
