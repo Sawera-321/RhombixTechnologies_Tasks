@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Users</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        min-height: 100vh;
+        background-color: #f4f4f4;
+      }
+
+      .sidebar {
+        width: 240px;
+        background-color: #0a3c46;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem 1rem;
+        transition: width 0.3s ease;
+        overflow: hidden;
+      }
+
+      .sidebar.collapsed {
+        width: 70px;
+      }
+
+      .logo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .logo span {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .toggle-btn {
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      .profile {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .profile img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+      }
+
+      .profile div {
+        color: #cde;
+        font-size: 13px;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+        transition: 0.3s;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        background-color: hsl(199, 98%, 56%);
+      }
+
+      .sidebar.collapsed .nav-links a span,
+      .sidebar.collapsed .logo span,
+      .sidebar.collapsed .profile {
+        display: none;
+      }
+
+      .logout {
+        margin: 2em auto;
+        width: 80%;
+      }
+
+      .logout button {
+        width: 100%;
+        padding: 0.6rem;
+        background-color: #dc3545;
+        border: none;
+        color: #fff;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .logout button:hover {
+        background-color: #c82333;
+      }
+
+      .main-content {
+        flex: 1;
+        padding: 2rem;
+      }
+
+      .main-content h1 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #ccc;
+        text-align: left;
+      }
+
+      th {
+        background-color: #17a2b8;
+        color: white;
+      }
+
+      button {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      button:hover {
+        background-color: #c82333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar" id="sidebar">
+      <div class="logo">
+        <span>Admin Panel</span>
+        <button class="toggle-btn" onclick="toggleSidebar()">
+          <i class="bx bx-menu"></i>
+        </button>
+      </div>
+      <div class="profile">
+        <img
+          src="assets/profile.jpeg"
+          alt="Admin"
+          style="
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            margin-bottom: 10px;
+          "
+        />
+        <div style="font-weight: bold; color: white">Sawaira Abbasi</div>
+        <div style="font-size: 13px; color: #cde">
+          sawairaikhlaqabbasi@gmail.com
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="admin-dashboard.html"
+          ><i class="bx bx-home"></i><span>Dashboard</span></a
+        >
+        <a href="index.html"> <i class="bx bx-home"></i> <span>Home</span> </a>
+
+        <a href="manage-posts.html"
+          ><i class="bx bx-edit"></i><span>Manage Posts</span></a
+        >
+        <a href="manage-users.html" class="active"
+          ><i class="bx bx-user"></i><span>Manage Users</span></a
+        >
+        <a href="manage-comments.html"
+          ><i class="bx bx-comment-detail"></i><span>Manage Comments</span></a
+        >
+      </div>
+      <div class="logout">
+        <button onclick="logoutAdmin()">
+          <i class="bx bx-log-out"></i><span> Logout</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <h1>Registered Users</h1>
+      <table id="userTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script>
+      function logoutAdmin() {
+        localStorage.removeItem("isAdminLoggedIn");
+        window.location.href = "admin-login.html";
+      }
+
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("collapsed");
+      }
+
+      if (!localStorage.getItem("isAdminLoggedIn")) {
+        window.location.href = "admin-login.html";
+      }
+
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const tbody = document.querySelector("#userTable tbody");
+
+      function renderUsers() {
+        tbody.innerHTML = "";
+        users.forEach((user, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+          <td>${user.name}</td>
+          <td>${user.email}</td>
+          <td>${user.username}</td>
+          <td><button onclick="deleteUser(${index})">Delete</button></td>
+        `;
+          tbody.appendChild(row);
+        });
+      }
+
+      function deleteUser(index) {
+        users.splice(index, 1);
+        localStorage.setItem("users", JSON.stringify(users));
+        renderUsers();
+      }
+
+      renderUsers();
+    </script>
+  </body>
+</html>

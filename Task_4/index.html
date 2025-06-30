@@ -1,0 +1,556 @@
+<script>
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (!currentUser) {
+    window.location.href = "signup.html";
+  }
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogger Platform</title>
+    <!-- Box-icon -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <script>
+      // Redirect if not signed up or not logged in
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+      if (!isLoggedIn || isLoggedIn !== "true") {
+        alert("Please sign up to access the blog.");
+        window.location.href = "signup.html";
+      }
+    </script>
+
+    <header>
+      <div class="nav container">
+        <div class="logo">
+          <h1>SIA<span> &nbsp;Blogging</span></h1>
+        </div>
+        <div class="nav-links">
+          <a href="index.html" class="navLink">Home</a>
+          <a href="admin-dashboard.html" class="navLink">Admin Panel</a>
+          <a href="#" class="logoutBtn" onclick="logout()"
+            ><i class="bx bx-log-out"></i> &nbsp;Logout</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <section class="home" id="home">
+      <div class="home-text container">
+        <h2 class="home-title">Pulse Blogger</h2>
+        <span class="home-subtitle">Stay inspired, stay informed </span>
+      </div>
+    </section>
+
+    <section class="about container" id="about">
+      <div class="contentBx">
+        <h2 class="titleText">Catch up with the trending topics</h2>
+        <p class="title-text">
+          Welcome to
+          <strong> SIA Blogging World</strong> — your go-to space for fresh
+          ideas, thoughtful insights, and real stories. Whether you're here to
+          learn something new, find inspiration, or just enjoy a good read,
+          we’re glad you stopped by. This blog was created with one goal in
+          mind: to share valuable, relatable, and honest content that helps
+          people grow, connect, and stay curious. From personal experiences and
+          how-to guides to deep dives into topics that matter, we aim to bring
+          you content that's worth your time. Behind every post is a passion for
+          storytelling, a commitment to quality, and a desire to spark
+          meaningful conversations. We believe in keeping things authentic — no
+          clickbait, no fluff — just real content for real people.
+        </p>
+        <div id="extra-about" class="hidden-text">
+          <h3>🙌 Join the Journey</h3>
+          <p class="title-text">
+            This blog isn’t just about us — it’s about you. Your thoughts, your
+            feedback, your presence. Leave a comment, subscribe to our
+            newsletter, or just drop by when you need a fresh perspective.
+            Thanks for being here. Let’s grow together, one post at a time.
+          </p>
+        </div>
+        <a
+          href="javascript:void(0)"
+          class="readmore-btn2"
+          onclick="toggleReadMore()"
+          >Read more</a
+        >
+      </div>
+      <div class="imgBx">
+        <img src="assets/about.jpeg" alt="" class="fitBg" />
+      </div>
+    </section>
+
+    <!-- Search Bar -->
+    <div class="search-box container">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search by title, author, keyword or category..."
+      />
+      <div class="search-icon">
+        <i class="bx bx-search"></i>
+      </div>
+    </div>
+
+    <div class="post-filter container">
+      <span class="filter-item active-filter" data-filter="all">All</span>
+      <span class="filter-item" data-filter="tech">Tech</span>
+      <span class="filter-item" data-filter="food">Food</span>
+      <span class="filter-item" data-filter="news">News</span>
+    </div>
+
+    <!-- Create New  Post Button -->
+    <div class="container" style="text-align: center">
+      <a href="#create-post" class="create-post-btn"
+        ><i class="bx bx-plus"></i> &nbsp;Create a Post</a
+      >
+    </div>
+
+    <!-- Posts Container -->
+    <div class="post container posts-container">
+      <!-- Post 1 -->
+      <!-- Example for a hardcoded post -->
+      <div class="post-box tech">
+        <img src="assets/tech2.jpeg" alt="" class="post-img" />
+        <h2 class="category">Tech</h2>
+        <a href="#" class="post-title"
+          >Top 10 Frontend Tools Developers Should Know in 2025</a
+        >
+        <span class="post-date">22 Apr 2025</span>
+        <p class="post-description">
+          Discover the most powerful frontend development tools to speed up your
+          workflow, improve code quality, and build responsive web applications
+          with ease.
+        </p>
+        <div class="profile">
+          <img src="assets/salar.jpeg" alt="" class="profile-img" />
+          <span class="profile-name">Salar</span>
+        </div>
+
+        <!-- Comment section-->
+        <div class="comment-section">
+          <h4>Leave a Comment</h4>
+          <div class="comment-input-wrapper">
+            <textarea
+              id="text-101"
+              class="hardcomment"
+              placeholder="Write your comment here..."
+            ></textarea>
+            <i
+              class="fas fa-paper-plane submit-icon"
+              onclick="submitComment(101)"
+            ></i>
+          </div>
+          <div id="comments-101" class="comments"></div>
+        </div>
+      </div>
+
+      <!-- Post 2 -->
+      <div class="post-box food">
+        <img src="assets/food1.jpeg" alt="" class="post-img" />
+        <h2 class="category">Food</h2>
+        <a href="#" class="post-title"
+          >5 Daily Habits to Boost Your Mental Wellbeing</a
+        >
+        <span class="post-date">10 Mar 2023</span>
+        <p class="post-description">
+          Discover simple yet effective daily habits that can help improve your
+          mental health, from mindful breathing to tech-free mornings.
+        </p>
+        <div class="profile">
+          <img src="assets/emily.jpeg" alt="" class="profile-img" />
+          <span class="profile-name">Dr. Emily Stone</span>
+        </div>
+
+        <!-- Comment -->
+        <div class="comment-section">
+          <h4>Leave a Comment</h4>
+          <div class="comment-input-wrapper">
+            <textarea
+              id="text-102"
+              class="hardcomment"
+              placeholder="Write your comment here..."
+            ></textarea>
+            <i
+              class="fas fa-paper-plane submit-icon"
+              onclick="submitComment()"
+            ></i>
+          </div>
+          <div id="comments-single" class="comments"></div>
+        </div>
+      </div>
+      <!-- Post 3 -->
+      <div class="post-box news">
+        <img src="assets/news1.jpeg" alt="" class="post-img" />
+        <h2 class="category">News</h2>
+        <a href="#" class="post-title"
+          >Global Tech Conference 2025 Announces Major AI Breakthroughs</a
+        >
+        <span class="post-date">10 Jun 2025</span>
+        <p class="post-description">
+          At the Global Tech Conference, top researchers unveiled revolutionary
+          advancements in generative AI and robotics, signaling a new era in
+          automation and creativity.
+        </p>
+        <div class="profile">
+          <img src="assets/elana.jpeg" alt="" class="profile-img" />
+          <span class="profile-name">Elena Sparks</span>
+        </div>
+
+        <!-- Comment -->
+        <div class="comment-section">
+          <h4>Leave a Comment</h4>
+          <div class="comment-input-wrapper">
+            <textarea
+              id="text-103"
+              class="hardcomment"
+              placeholder="Write your comment here..."
+            ></textarea>
+            <i
+              class="fas fa-paper-plane submit-icon"
+              onclick="submitComment()"
+            ></i>
+          </div>
+          <div id="comments-single" class="comments"></div>
+        </div>
+      </div>
+
+      <!-- Post 4 -->
+      <div class="post-box tech">
+        <img src="assets/tech3.jpeg" alt="" class="post-img" />
+        <h2 class="category">Tech</h2>
+        <a href="#" class="post-title"
+          >Why Web Performance Matters: Speeding Up Your Site</a
+        >
+        <span class="post-date">05 May 2025</span>
+        <p class="post-description">
+          Website performance is key to user experience and SEO. Learn the
+          techniques and tools to reduce load times, optimize images, and boost
+          site speed.
+        </p>
+        <div class="profile">
+          <img src="assets/janan.jpeg" alt="" class="profile-img" />
+          <span class="profile-name">Janan</span>
+        </div>
+
+        <!-- Comment -->
+        <div class="comment-section">
+          <h4>Leave a Comment</h4>
+          <div class="comment-input-wrapper">
+            <textarea
+              id="text-104"
+              class="hardcomment"
+              placeholder="Write your comment here..."
+            ></textarea>
+            <i
+              class="fas fa-paper-plane submit-icon"
+              onclick="submitComment()"
+            ></i>
+          </div>
+          <div id="comments-single" class="comments"></div>
+        </div>
+      </div>
+      <!-- Post 5 -->
+      <div class="post-box food">
+        <img src="assets/food2.jpeg" alt="" class="post-img" />
+        <h2 class="category">Food</h2>
+        <a href="#" class="post-title"
+          >10 Easy Dinner Recipes for Busy Weeknights</a
+        >
+        <span class="post-date">15 May 2023</span>
+        <p class="post-description">
+          Short on time? These quick and tasty dinner recipes are perfect for
+          weeknights when you want something delicious without the fuss.
+        </p>
+        <div class="profile">
+          <img src="assets/chef.jpeg" alt="" class="profile-img" />
+          <span class="profile-name">Chef Andrea Ruiz</span>
+        </div>
+
+        <!-- Comment -->
+        <div class="comment-section">
+          <h4>Leave a Comment</h4>
+          <div class="comment-input-wrapper">
+            <textarea
+              id="text-105"
+              class="hardcomment"
+              placeholder="Write your comment here..."
+            ></textarea>
+            <i
+              class="fas fa-paper-plane submit-icon"
+              onclick="submitComment()"
+            ></i>
+          </div>
+          <div id="comments-single" class="comments"></div>
+        </div>
+      </div>
+
+      <!-- Post 6 -->
+      <div class="post-box news">
+        <img src="assets/new2.jpeg" alt="" class="post-img" />
+        <h2 class="category">News</h2>
+        <a href="#" class="post-title"
+          >Climate Summit 2025: Nations Commit to Carbon Neutral Targets</a
+        >
+        <span class="post-date">05 Jun 2025</span>
+        <p class="post-description">
+          Over 60 countries pledged stronger climate action at the 2025 summit,
+          aiming for carbon neutrality by 2040 through renewable investments and
+          policy changes.
+        </p>
+        <div class="profile">
+          <img src="assets/david.jpeg" alt="" class="profile-img" />
+          <span class="profile-name">David Lin</span>
+        </div>
+
+        <!-- Comment -->
+        <div class="comment-section">
+          <h4>Leave a Comment</h4>
+          <div class="comment-input-wrapper">
+            <textarea
+              id="text-106"
+              class="hardcomment"
+              placeholder="Write your comment here..."
+            ></textarea>
+            <i
+              class="fas fa-paper-plane submit-icon"
+              onclick="submitComment()"
+            ></i>
+          </div>
+          <div id="comments-single" class="comments"></div>
+        </div>
+      </div>
+
+      <!-- Post 7 -->
+      <div class="post-box tech">
+        <img src="assets/tech1.png" alt="" class="post-img" />
+        <h2 class="category">Tech</h2>
+        <a href="#" class="post-title"
+          >Mastering UI/UX Design with Figma: A Beginner’s Guide</a
+        >
+        <span class="post-date">12 Feb 2022</span>
+        <p class="post-description">
+          Learn how to create intuitive and visually appealing user interfaces
+          using Figma. This guide walks you through layout techniques,
+          components, and collaboration tools.
+        </p>
+        <div class="profile">
+          <img src="assets/img1.1.jpg" alt="" class="profile-img" />
+          <span class="profile-name">MKHB</span>
+        </div>
+
+        <!-- Comment -->
+        <div class="comment-section">
+          <h4>Leave a Comment</h4>
+          <div class="comment-input-wrapper">
+            <textarea
+              id="text-107"
+              class="hardcomment"
+              placeholder="Write your comment here..."
+            ></textarea>
+            <i
+              class="fas fa-paper-plane submit-icon"
+              onclick="submitComment()"
+            ></i>
+          </div>
+          <div id="comments-single" class="comments"></div>
+        </div>
+      </div>
+
+      <!-- Post 8 -->
+      <div class="post-box food">
+        <img src="assets/food3.jpeg" alt="" class="post-img" />
+        <h2 class="category">Food</h2>
+        <a href="#" class="post-title"
+          >The Art of Baking: Tips for Perfect Cakes Every Time</a
+        >
+        <span class="post-date">28 May 2023</span>
+        <p class="post-description">
+          Master the secrets of baking moist, fluffy cakes from scratch with
+          these essential tips, tricks, and tools for every home baker.
+        </p>
+        <div class="profile">
+          <img src="assets/chef2.jpeg" alt="" class="profile-img" />
+          <span class="profile-name">Rachel Bloom</span>
+        </div>
+
+        <!-- Comment -->
+        <div class="comment-section">
+          <h4>Leave a Comment</h4>
+          <div class="comment-input-wrapper">
+            <textarea
+              id="text-108"
+              class="hardcomment"
+              placeholder="Write your comment here..."
+            ></textarea>
+            <i
+              class="fas fa-paper-plane submit-icon"
+              onclick="submitComment()"
+            ></i>
+          </div>
+          <div id="comments-single" class="comments"></div>
+        </div>
+      </div>
+
+      <!-- Post 9 -->
+      <div class="post-box news">
+        <img src="assets/new3.jpeg" alt="" class="post-img" />
+        <h2 class="category">News</h2>
+        <a href="#" class="post-title"
+          >SpaceX Launches First Civilian Mission to Lunar Orbit</a
+        >
+        <span class="post-date">20 May 2025</span>
+        <p class="post-description">
+          SpaceX successfully launched its first all-civilian crew on a mission
+          around the moon, marking a historic moment in commercial space
+          exploration.
+        </p>
+        <div class="profile">
+          <img src="assets/laura.jpeg" alt="" class="profile-img" />
+          <span class="profile-name">Laura Chen</span>
+        </div>
+        <!-- Comment -->
+        <div class="comment-section">
+          <h4>Leave a Comment</h4>
+          <div class="comment-input-wrapper">
+            <textarea
+              id="text-109"
+              class="hardcomment"
+              placeholder="Write your comment here..."
+            ></textarea>
+            <i
+              class="fas fa-paper-plane submit-icon"
+              onclick="submitComment(109)"
+            ></i>
+          </div>
+          <div id="comments-109" class="comments"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post Creation Form -->
+    <section id="create-post" class="create-post-container container">
+      <h2>Create New Post</h2>
+      <input type="text" id="post-title" placeholder="Enter Post Title" />
+      <textarea
+        id="post-content"
+        placeholder="Write your post content..."
+      ></textarea>
+      <input
+        type="text"
+        id="post-tags"
+        placeholder="Category (e.g. Tech, Food)"
+      />
+      <label>Enter Hashtags (comma-separated):</label>
+      <input
+        type="text"
+        id="post-hashtags"
+        placeholder="#fun, #travel, #food"
+      />
+      <label>Choose Post Image:</label>
+      <input type="file" id="post-image" accept="image/*" />
+
+      <label>Choose Profile Picture:</label>
+      <input type="file" id="profile-image" accept="image/*" />
+
+      <button onclick="createPost()" style="margin: 1em auto">
+        Create Post
+      </button>
+    </section>
+
+    <footer>
+      <div class="footer-container">
+        <div class="sec aboutus">
+          <h2>📝 About Us</h2>
+          <h4>✨ What You'll Find Here:</h4>
+          <ul class="aboutus-ul-links">
+            <li>📚 Thoughtful Articles</li>
+            <li>💡 Tips, Reviews, and Resources</li>
+            <li>🗣️ A Community for Sharing Ideas and Opinions</li>
+            <li>📸 Occasional Stories from Our Everyday Lives</li>
+          </ul>
+          <div class="social-links">
+            <ul class="social-icons">
+              <li>
+                <a href="https://www.facebook.com" target="_blank"
+                  ><i class="bx bxl-facebook"></i
+                ></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com" target="_blank"
+                  ><i class="bx bxl-instagram"></i
+                ></a>
+              </li>
+              <li>
+                <a href="https://www.twitter.com" target="_blank"
+                  ><i class="bx bxl-twitter"></i
+                ></a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com" target="_blank"
+                  ><i class="bx bxl-linkedin"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="sec quicklinks">
+          <h2>Quick Links</h2>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="sec contactBx">
+          <h2>Contact Info</h2>
+          <ul class="info">
+            <li>
+              <span><i class="bx bxs-map"></i></span>
+              <span>Tarlai Islamabad</span>
+            </li>
+            <li>
+              <span><i class="bx bxs-phone"></i></span>
+              <span>+92345678009</span>
+            </li>
+            <li>
+              <span><i class="bx bx-envelope"></i></span>
+              <p>
+                <a href="mailto:sawairaikhlaqabbasi@gmail.com"
+                  >sawairaikhlaqabbasi@gmail.com</a
+                >
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="script.js"></script>
+  </body>
+</html>

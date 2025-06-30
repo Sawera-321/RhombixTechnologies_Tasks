@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f1f3f6;
+        display: flex;
+        height: 100vh;
+      }
+
+      .sidebar {
+        width: 250px;
+        background-color: #0a3c46;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 1rem;
+        overflow: hidden;
+        transition: width 0.3s ease;
+      }
+
+      .sidebar.collapsed {
+        width: 70px;
+      }
+
+      .sidebar .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        white-space: nowrap;
+      }
+
+      .toggle-btn {
+        font-size: 24px;
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+
+      .profile {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .profile img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        margin-bottom: 10px;
+      }
+
+      .profile div {
+        color: #cde;
+        font-size: 13px;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: white;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0.8rem 1rem;
+        border-radius: 10px;
+        transition: background 0.3s;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .nav-links a:hover {
+        background-color: hsl(199, 98%, 56%);
+      }
+
+      .logout {
+        margin: 2em auto;
+        width: 80%;
+      }
+
+      .logout button {
+        width: 100%;
+        padding: 0.8rem;
+        background-color: #dc3545;
+        border: none;
+        color: #fff;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .logout button:hover {
+        background-color: #c82333;
+      }
+
+      .main-content {
+        flex: 1;
+        padding: 2rem;
+        overflow-y: auto;
+      }
+
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .dashboard-header h1 {
+        font-size: 2rem;
+        color: #1c2b4a;
+      }
+
+      .dashboard-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .card {
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      .card h2 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: #1c2b4a;
+      }
+
+      .card p {
+        font-size: 1rem;
+        color: #555;
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          position: fixed;
+          left: -260px;
+          top: 0;
+          height: 100%;
+          z-index: 100;
+        }
+
+        .sidebar.active {
+          left: 0;
+        }
+
+        .main-content {
+          padding: 1rem;
+        }
+
+        .toggle-btn.fixed {
+          position: fixed;
+          top: 1rem;
+          left: 1rem;
+          z-index: 110;
+        }
+      }
+
+      .sidebar.collapsed .logo span,
+      .sidebar.collapsed .nav-links a span,
+      .sidebar.collapsed .logout button,
+      .sidebar.collapsed .profile {
+        display: none;
+      }
+
+      .sidebar .nav-links a i {
+        font-size: 20px;
+        min-width: 24px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar" id="sidebar">
+      <div class="logo">
+        <span>Admin Panel</span>
+        <button class="toggle-btn" onclick="toggleSidebar()">
+          <i class="bx bx-menu"></i>
+        </button>
+      </div>
+
+      <!-- Admin Profile Section -->
+      <div class="profile">
+        <img src="assets/profile.jpeg" alt="Admin" />
+        <div style="font-weight: bold; color: white">Sawaira Abbasi</div>
+        <div>sawairaikhlaqabbasi@gmail.com</div>
+      </div>
+
+      <div class="nav-links">
+        <a href="index.html"> <i class="bx bx-home"></i> <span>Home</span> </a>
+        <a href="manage-posts.html">
+          <i class="bx bx-edit"></i> <span>Manage Posts</span>
+        </a>
+        <a href="manage-users.html">
+          <i class="bx bx-user"></i> <span>Manage Users</span>
+        </a>
+        <a href="manage-comments.html">
+          <i class="bx bx-comment-detail"></i> <span>Manage Comments</span>
+        </a>
+      </div>
+
+      <div class="logout">
+        <button onclick="logoutAdmin()">
+          <i class="bx bx-log-out"></i> <span> Logout</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="dashboard-header">
+        <h1>Welcome, Admin 👋</h1>
+      </div>
+
+      <div class="dashboard-cards">
+        <div class="card">
+          <h2>Instructions</h2>
+          <p>Use the menu to manage posts, users, and comments.</p>
+        </div>
+        <div class="card">
+          <h2>Quick Tip</h2>
+          <p>You can toggle the sidebar using the menu icon.</p>
+        </div>
+        <div class="card">
+          <h2>Status</h2>
+          <p>You're logged in as administrator.</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function logoutAdmin() {
+        localStorage.removeItem("isAdminLoggedIn");
+        window.location.href = "admin-login.html";
+      }
+
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("collapsed");
+      }
+
+      if (!localStorage.getItem("isAdminLoggedIn")) {
+        window.location.href = "admin-login.html";
+      }
+    </script>
+  </body>
+</html>
