@@ -65,3 +65,30 @@ This project was developed as part of my internship at **Rhombix Technologies**.
 This project enhanced my understanding of client-side data handling, UI/UX design, and state management using localStorage. It was a valuable part of my internship assignment, reinforcing my skills in front-end development and allowing me to create a practical solution for personal content management.
 
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+**4. Task_4: 📝 Blogging Website with Admin Panel**
+This project was developed as part of my internship **at Rhombix Technologies.** It is a dynamic and full-featured Blogging Website designed to enable users to explore, search, and interact with blog content — while giving admins the ability to securely manage posts, users, and comments via a dedicated admin panel.
+
+**🛠️ Key Features:**
+
+- Create, edit, and delete blog posts with a rich text editor
+- Upload and display images within posts
+- Filter posts by categories and tags
+- Enable users to comment and engage with posts
+- Admin login system with role-based access control
+- Admin dashboard for managing blog content, users, and comments
+- Responsive and user-friendly interface for both users and admins
+
+**💡 Technologies Used:**
+
+- HTML
+- CSS
+- JavaScript
+
+This project greatly improved my understanding of CMS architecture, user authentication, and content management workflows. It also strengthened my skills in designing both frontend interfaces and backend logic to create a seamless and secure user experience. Developing this system provided valuable insight into building real-world, scalable web applications.
+
+
+
+
